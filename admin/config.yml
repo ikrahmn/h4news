@@ -2,7 +2,8 @@ backend:
   name: github
   repo: ikrahmn/h4news   # ← replace
   branch: main
-  site_domain: h4news.netlify.app
+  site_domain: h4news.netlify.app    # Your Netlify URL
+  base_url: https://api.netlify.com  # Tells Decap to use Netlify's login server
 
 media_folder: "assets/images"
 public_folder: "/assets/images"
