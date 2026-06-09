@@ -2,12 +2,12 @@ backend:
   name: github
   repo: ikrahmn/h4news   # ← replace
   branch: main
-  base_url: https://sveltia-cms-auth.YOUR_WORKER.workers.dev  # or use Netlify identity
+  site_domain: h4news.netlify.app
 
 media_folder: "assets/images"
 public_folder: "/assets/images"
 
-site_url: https://YOUR_USERNAME.github.io/h4news
+site_url: https://ikrahmn.github.io/h4news
 
 collections:
   - name: articles
