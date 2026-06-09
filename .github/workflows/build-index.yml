@@ -1,0 +1,66 @@
+name: Build Article Index
+
+on:
+  push:
+    paths: ['content/articles/**']
+  workflow_dispatch:
+
+jobs:
+  index:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate index.json
+        run: |
+          python3 - <<'EOF'
+          import os, json, re
+          from pathlib import Path
+
+          def parse_fm(text):
+              m = re.match(r'^---\s*\n(.*?)\n---\s*\n(.*)', text, re.DOTALL)
+              if not m: return {}, text
+              meta = {}
+              for line in m.group(1).splitlines():
+                  if ':' in line:
+                      k, _, v = line.partition(':')
+                      meta[k.strip()] = v.strip().strip('"\'')
+              body = m.group(2)
+              return meta, body
+
+          def read_time(text):
+              return max(1, len(text.split()) // 200)
+
+          articles = []
+          p = Path('content/articles')
+          if p.exists():
+              for f in sorted(p.glob('*.md'), reverse=True):
+                  raw  = f.read_text(encoding='utf-8')
+                  meta, body = parse_fm(raw)
+                  slug = f.stem
+                  articles.append({
+                      'id':       slug,
+                      'title':    meta.get('title', slug),
+                      'excerpt':  meta.get('excerpt', body[:200].replace('\n',' ')),
+                      'author':   meta.get('author', 'Staff'),
+                      'date':     meta.get('date', ''),
+                      'category': meta.get('category', 'General'),
+                      'image':    meta.get('image', ''),
+                      'lead':     meta.get('lead', ''),
+                      'tags':     meta.get('tags', '').split(','),
+                      'readTime': read_time(body),
+                  })
+
+          Path('index.json').write_text(json.dumps(articles, ensure_ascii=False, separators=(',',':')))
+          print(f'Indexed {len(articles)} articles')
+          EOF
+
+      - name: Commit index.json
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.json
+          git diff --staged --quiet || git commit -m "chore: rebuild index.json [skip ci]"
+          git push

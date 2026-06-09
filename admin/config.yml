@@ -1,0 +1,28 @@
+backend:
+  name: github
+  repo: ikrahmn/h4news   # ← replace
+  branch: main
+  base_url: https://sveltia-cms-auth.YOUR_WORKER.workers.dev  # or use Netlify identity
+
+media_folder: "assets/images"
+public_folder: "/assets/images"
+
+site_url: https://YOUR_USERNAME.github.io/h4news
+
+collections:
+  - name: articles
+    label: Articles
+    folder: content/articles
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: Title,    name: title,    widget: string }
+      - { label: Lead,     name: lead,     widget: text,   required: false, hint: "TL;DR hook shown below headline" }
+      - { label: Excerpt,  name: excerpt,  widget: text,   required: false }
+      - { label: Author,   name: author,   widget: string, default: Staff }
+      - { label: Date,     name: date,     widget: datetime }
+      - { label: Category, name: category, widget: select,
+          options: [World, Tech, Culture, Science, Opinion, Breaking] }
+      - { label: Hero Image, name: image,  widget: image,  required: false }
+      - { label: Tags,     name: tags,     widget: list,   required: false }
+      - { label: Body,     name: body,     widget: markdown }
