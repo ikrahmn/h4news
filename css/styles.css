@@ -480,8 +480,19 @@ ul, ol { list-style: none; }
   .nav-cats, .nav-brand ~ .nav-cats { display: none; }
   .hamburger { display: flex; }
 
-  #cards-grid { grid-template-columns: 1fr; padding: 0 var(--sp-4) var(--sp-12); gap: var(--sp-3); }
-  .card:nth-child(n) { grid-column: span 1; }
+  /* ── FIXED MOBILE GRID TRACKS ── */
+  #cards-grid { 
+    grid-template-columns: 1fr; 
+    padding: 0 var(--sp-4) var(--sp-12); 
+    gap: var(--sp-4); 
+  }
+  
+  /* Force ALL card positions and variations to behave nicely as full-width blocks */
+  .card,
+  .card:nth-child(n) { 
+    grid-column: span 1 !important; 
+  }
+  
   .card:nth-child(1) .card-title { font-size: var(--t-xl); }
 
   .article-title { font-size: clamp(2rem,8vw,3rem); }
