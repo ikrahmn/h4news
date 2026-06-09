@@ -1,12 +1,15 @@
 ---
-title: "AI Models Can Now Reason About Their Own Uncertainty"
-lead: "A new class of self-aware language models knows what it doesn't know — and that changes everything."
-excerpt: "Researchers at three leading AI labs have independently published findings showing that next-gen models can now quantify their own epistemic uncertainty in real time."
-author: "Ikram Rahmani"
-date: "2025-06-09T10:00:00Z"
-category: "Tech"
-image: ""
-tags: "AI, Machine Learning, Research"
+title: AI Models Can Now Reason About Their Own Uncertainty
+lead: A new class of self-aware language models knows what it doesn't know — and
+  that changes everything.
+excerpt: Researchers at three leading AI labs have independently published
+  findings showing that next-gen models can now quantify their own epistemic
+  uncertainty in real time.
+author: Ikram Rahmani
+date: 2025-06-09T10:00:00Z
+category: Tech
+image: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT29GToGqLOo-IuPIbGzXw1qkqy4PLzgILoJw&s
+tags: AI, Machine Learning, Research
 ---
 
 The latest generation of large language models isn't just smarter — it's more honest about what it doesn't know.
